@@ -14,8 +14,8 @@
 Seluruh audit keamanan, audit bug mendalam, perbaikan logika bisnis kritis (P0-P2), standarisasi model PSR-4, serta penyusunan dokumentasi teknis menyeluruh (`PRD.md`, `ERD.md`, `ARCHITECTURE.md`, `SPECIFICATION.md`, `SETUP.md`, `README.md`) telah selesai dan terverifikasi dengan automated tests (5 passing tests). 
 
 Status diberi penanda `WITH WARNINGS` karena:
-1. Direktori workspace lokal saat ini **belum diinisialisasi sebagai repositori Git** (`fatal: not a git repository`). Inisialisasi `git init` dan pembuatan commit awal memerlukan persetujuan eksplisit pemilik proyek.
-2. Berkas lisensi hukum (`LICENSE`) belum ditentukan oleh pemilik (`OWNER DECISION REQUIRED`).
+1. Berkas lisensi hukum (`LICENSE`) telah ditetapkan sebagai **MIT License** sesuai instruksi eksplisit pengguna.
+2. Repositori Git telah diinisialisasi pada branch `main` dan initial commit telah dibuat secara bersih.
 3. Terdapat 61 advisories kerentanan pada pustaka pihak ketiga di `composer.lock` (termasuk `dompdf` dan `symfony`) yang memerlukan evaluasi update versi terpisah.
 4. Kompilasi aset frontend (`npm run build`) belum dijalankan di workspace lokal karena folder `node_modules` belum diinstal.
 
@@ -72,15 +72,16 @@ Status diberi penanda `WITH WARNINGS` karena:
 
 ## D. Risiko & Pekerjaan Tersisa (Residual Risks & Blockers)
 
-1. **Inisialisasi Git & Commit:** Direktori saat ini bukan git repository. Perlu otorisasi pengguna untuk menjalankan `git init`, staging selektif, dan initial commit.
-2. **Pemilihan Lisensi Legal:** Perlu keputusan pemilik proyek mengenai jenis lisensi (misal: Proprietary, MIT, GPL) sebelum repositori dipublikasikan ke publik.
-3. **Pembaruan Dependensi Pihak Ketiga:** Penjadwalan upgrade minor/patch untuk paket Composer yang terdampak kerentanan keamanan setelah verifikasi menyeluruh.
-4. **Instalasi Node Modules:** Jalankan `npm install && npm run build` di lingkungan yang siap untuk mengompilasi bundel Vite frontend.
+1. **Pembaruan Dependensi Pihak Ketiga:** Penjadwalan upgrade minor/patch untuk paket Composer yang terdampak kerentanan keamanan setelah verifikasi menyeluruh.
+2. **Instalasi Node Modules:** Jalankan `npm install && npm run build` di lingkungan yang siap untuk mengompilasi bundel Vite frontend.
+3. **Database Migration Fisik:** Buat database `db_apotek_celine` di MySQL sebelum menjalankan `php artisan migrate --seed` pada deployment riil.
 
 ---
 
 ## E. Status Git
 
-- **Kondisi Repository:** Belum terinisialisasi Git (`not a git repository`).
-- **File Konfigurasi Git:** `.gitignore` telah distandarisasi untuk mengabaikan `.env`, direktori vendor, build cache, dan log.
+- **Kondisi Repository:** Repositori Git telah diinisialisasi pada branch `main`.
+- **Commit History:** Root commit `0a7e970` telah dibuat (`chore: initial repository standardization, audit remediation, and documentation`).
+- **File Konfigurasi Git:** `.gitignore` telah distandarisasi untuk mengabaikan `.env`, direktori vendor, build cache, session, dan log.
 - **Pekerjaan Pengguna:** Seluruh kode sumber asli dipertahankan, tidak ada file penting yang terhapus secara destruktif, hanya file stray kosong `stok` dan duplikat `app/Models/CekPeran.php` yang dibersihkan.
+- **Remote Push:** Push ke remote belum dijalankan (menunggu penambahan remote URL dan instruksi eksplisit).
